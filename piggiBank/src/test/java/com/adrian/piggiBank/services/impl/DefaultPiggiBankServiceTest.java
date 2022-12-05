@@ -59,6 +59,35 @@ public class DefaultPiggiBankServiceTest {
   }
 
   @Test
+  public void testSumAllCoins () throws Exception {
+    defaultPiggiBankService.addCoin(coinDto50);
+    defaultPiggiBankService.addCoin(coinDto50);
+    defaultPiggiBankService.addCoin(coinDto100);
+    defaultPiggiBankService.addCoin(coinDto100);
+    Integer sum = defaultPiggiBankService.sumAllCoins();
+    assertEquals(300,sum);
+  }
+
+  @Test
+  public void testSumCoinByDenomination () throws Exception {
+    defaultPiggiBankService.addCoin(coinDto50);
+    defaultPiggiBankService.addCoin(coinDto50);
+    defaultPiggiBankService.addCoin(coinDto50);
+    Integer coin50 = defaultPiggiBankService.sumCoinByDenomination(coinDto50);
+    Integer coin100 = defaultPiggiBankService.sumCoinByDenomination(coinDto100);
+    Integer coin200 = defaultPiggiBankService.sumCoinByDenomination(coinDto200);
+    Integer coin500 = defaultPiggiBankService.sumCoinByDenomination(coinDto500);
+    Integer coin1000 = defaultPiggiBankService.sumCoinByDenomination(coinDto1000);
+
+    assertEquals(150, coin50);
+    assertEquals(0, coin100);
+    assertEquals(0, coin200);
+    assertEquals(0, coin500);
+    assertEquals(0, coin1000);
+
+  }
+
+  @Test
   public void testCountByDenomination () throws Exception {
     defaultPiggiBankService.addCoin(coinDto50);
     Integer coin50 = defaultPiggiBankService.countCountByDenomination(coinDto50);
